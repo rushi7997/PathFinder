@@ -1,47 +1,45 @@
 // Declaring needed variables
-let started
-let algo
-let startButton
-let screen
-let graph
-let rows
-let cols
-let resolution
-let openSet
-let closedSet
+let started;
+let algo;
+let startButton;
+let screen;
+let graph;
+let rows;
+let cols;
+let resolution;
+let openSet;
+let closedSet;
 let source;
 let destination;
-let shortestPath
+let shortestPath;
 let w;
 let h;
-let sourceSelected
-let destinationSelected
-// sourceColor = color(87, 50, 168)
-// destColor = color(140, 68, 20)
+let sourceSelected;
+let destinationSelected;
 
 function resetCanvas() {
-    console.log(new Node(0, 0))
+    console.log(new Node(0, 0));
     // Initializing variables
-    started = false
-    algo = null
-    resolution = 30
-    openSet = []
-    closedSet = []
-    shortestPath = []
-    sourceSelected = false
-    destinationSelected = false
+    started = false;
+    algo = null;
+    resolution = 30;
+    openSet = [];
+    closedSet = [];
+    shortestPath = [];
+    sourceSelected = false;
+    destinationSelected = false;
 
     rows = floor(height / resolution);
     cols = floor(width / resolution);
     w = width / cols;
     h = height / rows;
     graph = twoDArray(rows, cols);
-    startButton = document.getElementById("startButton")
-    startButton.disabled = false
-    startButton.innerHTML = "Visualize"
+    startButton = document.getElementById("startButton");
+    startButton.disabled = false;
+    startButton.innerHTML = "Visualize";
     startButton.onclick = start;
-    let message = document.getElementById('message')
-    message.innerHTML = ""
+    let message = document.getElementById('message');
+    message.innerHTML = "";
 
     // creating the graph
     for (let i = 0; i < cols; i++) {
@@ -143,23 +141,14 @@ function Node(i, j) {
         if (i < cols - 1) this.neighbors.push(graph[i + 1][j]);
         if (j > 0) this.neighbors.push(graph[i][j - 1]);
         if (j < rows - 1) this.neighbors.push(graph[i][j + 1]);
-        //Diagonal Neighbors
-        // if (i > 0 && j > 0) this.neighbors.push(graph[i - 1][j - 1]);
-        // if (i < cols - 1 && j < rows - 1) this.neighbors.push(graph[i + 1][j + 1]);
-        // if (i > 0 && j < rows - 1) this.neighbors.push(graph[i - 1][j + 1]);
-        // if (i < cols - 1 && j > 0) this.neighbors.push(graph[i + 1][j - 1]);
     }
 
     this.clicked = () => {
         if (sourceSelected) {
-            // if(this == source){
-            this.show(color(87, 50, 168))
-
-            // source = this
-            // srcORdstClicked = false
+            this.show(color(87, 50, 168));
         }
         else if (destinationSelected) {
-            this.show(color(140, 68, 20))
+            this.show(color(140, 68, 20));
         }
         else if (!this.obstacle) {
             this.obstacle = true;
@@ -176,7 +165,7 @@ function Node(i, j) {
 function twoDArray(rows, cols) {
     let arrays = new Array(cols);
     for (let i = 0; i < arrays.length; i++) {
-        arrays[i] = new Array(rows)
+        arrays[i] = new Array(rows);
     }
     return arrays;
 }
